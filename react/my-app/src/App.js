@@ -27,7 +27,9 @@ function App() {
       <h1>Hello World!</h1>
       
       <MyComponent />
-      <Name />
+      <Name firstName="Merideth" lastName="Bates"/>
+      <Name firstName="Beth" lastName="Bates"/>
+      <Name firstName="Agnes" lastName="Bates"/>
       <ThingILike />
     
     </div>
