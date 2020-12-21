@@ -6,7 +6,7 @@ module.exports = {
         filename: 'bundle.js',
         path: __dirname + '/dist',
     },
-    watch: true,
+    // watch: true,
     module: {
         rules: [
             {
@@ -17,5 +17,10 @@ module.exports = {
                 ]
             }
         ]
+    },
+    devServer: {
+        contentBase: './dist',
+        port:'3000',
+        inline: true
     }
 }
