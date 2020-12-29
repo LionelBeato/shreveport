@@ -1,6 +1,6 @@
 import logo from './logo.svg';
 import './App.css';
-import Counter from './Counter';
+import Counter from './components/Counter';
 import AddTodo from './components/AddTodo';
 import TodoList from './components/TodoList';
 import VisibilityFilters from './components/VisibilityFilters';
@@ -14,6 +14,7 @@ function App() {
      <AddTodo />
      <TodoList />
      <VisibilityFilters />
+     <Counter />
    </div>
   );
 }
