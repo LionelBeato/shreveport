@@ -1,10 +1,14 @@
-# Big O and Algorithms
+# Big O and Algorithms - Mon Jan 25, 2021
 
 ## What is Big O?
 
+Big O refers to Big O Notation. It is the languge programmers use to desribe an algorithm's time-space complexity.
+
 ## How do we use it? 
 
-### Worst Case Scenario
+We take an operation and factor it into the notation. For example, 
+
+### The Worst Case Scenario
 
 No matter the amount of operations and constants in your Big O, you will always want to simplify down to the worst case scenario!
 
