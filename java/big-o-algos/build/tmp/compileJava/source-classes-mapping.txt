@@ -1,0 +1,2 @@
+com/tts/bigo/Main.java
+ com.tts.bigo.Main
