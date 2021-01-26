@@ -30,6 +30,7 @@ class OtherMainTest {
         assertTrue(actual.contains(expected));
     }
 
+    // the name of this method follows whats known as the gherkin syntax
     @Test
     void whenICallMethodWithNo_ThenIShouldGetBackNoExceptionMessage() {
         Exception exception = assertThrows(NoException.class,
