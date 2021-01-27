@@ -13,7 +13,7 @@ A thread is what's known as a _thread of execution_. It's the smallest set of in
 
 ## Synchronization
 
-What is synchronization? synchronization is the tool we utilize to avoid thread interference and memory consistency errors.
+What is _synchronization_? Synchronization is the tool we utilize to avoid thread interference and memory consistency errors.
 
 - _This is synchronization as in "working together", not necessarily occuring at one and in the same way._
 
@@ -21,7 +21,7 @@ What is synchronization? synchronization is the tool we utilize to avoid thread 
 - One thing to note is that synchronization can also cause thread contention. This is when two or more threads try to access the same resource simultaneously. Note the blocking code example below.
   
 
-- A simple solution to invoke the `Thread` method `.join()`. This method will put the calling thread into a waiting state. It will remain in said state until the referenced thread terminates. This allows for inter-thread synchronization.
+- A simple solution is to invoke the `Thread` method `.join()`. This method will put the calling thread into a waiting state. It will remain in said state until the referenced thread terminates. This allows for inter-thread synchronization.
 
 
 - `.join()` creates a _happens-before_ relationship. All actions in the thread _happen-before_ any other thread successfully returns from a `.join()` on that thread.
