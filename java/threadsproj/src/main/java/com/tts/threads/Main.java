@@ -1,7 +1,11 @@
 package com.tts.threads;
 
+import java.lang.invoke.LambdaConversionException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.Executor;
+import java.util.concurrent.Executors;
+import java.util.function.Function;
 
 // liveness - this describes a concurrent applications ability to execute in a timely manner
 // deadlock - this describes when two threads are blocked forever, waiting for each other
@@ -113,6 +117,13 @@ public class Main {
 //        myOtherThreadSync.join(1000);
 
         System.out.println("last number from sync counter: " + synchronizedCounter.value());
+
+        Executor executor = Executors.newSingleThreadExecutor();
+        executor.execute(() -> {
+            System.out.println("Hello from an executor!");
+            System.out.println(Thread.currentThread().getName());
+        });
+
 
 
     }

@@ -15,7 +15,7 @@ A thread is what's known as a _thread of execution_. It's the smallest set of in
 
 What is _synchronization_? Synchronization is the tool we utilize to avoid thread interference and memory consistency errors.
 
-- _This is synchronization as in "working together", not necessarily occuring at one and in the same way._
+- _This is synchronization as in "working together", not necessarily occurring at once and in the same way.[<sup>1</sup>](#ereferences)_
 
 
 - One thing to note is that synchronization can also cause thread contention. This is when two or more threads try to access the same resource simultaneously. Note the blocking code example below.
@@ -34,7 +34,7 @@ What is _synchronization_? Synchronization is the tool we utilize to avoid threa
 - Threads can execute blocking code indefinitely, causing what's known as a _deadlock_.
 
 
-- Deadlocked code will typically result from variables utilized between multiple thread; if states are in the process of being changed, then neither thread will resolve. Observe the following code:
+- Deadlocked code will typically result from variables utilized between multiple thread; if states are in the process of being changed, then neither thread will resolve.[<sup>2</sup>](#references) Observe the following code:
 
     ```java
     public class Deadlock {
@@ -77,24 +77,43 @@ What is _synchronization_? Synchronization is the tool we utilize to avoid threa
 
   ![Alphonse and Gaston bowing indefinitely.](./bowing.jpg)
   > _The ever courteous Alphonse and Gaston humorously deadlocked._
-  
 
-## ~~Interrupts~~
+## Executors
 
-~~Not yet implemented!~~
+_Executors_ refer to objects that _encapsulate_ functionality related to thread management and creation.[<sup>3<sup>](#references) They decouple writing executable code with the threads they execute in. The Java API provides a _functional interface_ with a passable  `Runnable` object:
 
-## ~~Locks~~
+```java
+ Executor executor = anExecutor;
+ executor.execute(new RunnableTask1());
+ executor.execute(new RunnableTask2());
+ ```
 
-~~Not yet implemented!~~
+The Java API provides another Executor interface called _ExecutorService_. This is an extension of the original interface that provides more discrete methods and handle its own termination.[<sup>4</sup>](#references) 
 
-## ~~Thread Pool~~
+```java
+ void shutdownAndAwaitTermination(ExecutorService pool) {
+   pool.shutdown(); // Disable new tasks from being submitted
+   try {
+     // Wait a while for existing tasks to terminate
+     if (!pool.awaitTermination(60, TimeUnit.SECONDS)) {
+       pool.shutdownNow(); // Cancel currently executing tasks
+       // Wait a while for tasks to respond to being cancelled
+       if (!pool.awaitTermination(60, TimeUnit.SECONDS))
+           System.err.println("Pool did not terminate");
+     }
+   } catch (InterruptedException ie) {
+     // (Re-)Cancel if current thread also interrupted
+     pool.shutdownNow();
+     // Preserve interrupt status
+     Thread.currentThread().interrupt();
+   }
+ }
+```
+## Thread Pool
 
-~~Not yet implemented!~~
+>Most of the executor implementations in `java.util.concurrent` use thread pools, which consist of _worker threads_. This kind of thread exists separately from the Runnable and Callable tasks it executes and is often used to execute multiple tasks.[<sup>5<sup>](https://docs.oracle.com/javase/tutorial/essential/concurrency/pools.html)
 
-## ~~Executor~~ 
-
-~~Not yet implemented!~~
-
+Thread Pools are composed of worker threads. These threads exists seperate from `Runnable` created threads. Worker threads can be created all at once and accept any meaningful work from an `Executor`. This minimizes the overhead created from thread creation.[<sup>6</sup>](#references)
 
 ## Notes
 
@@ -104,13 +123,23 @@ What is _synchronization_? Synchronization is the tool we utilize to avoid threa
 - You should understand what constitutes a thread, what constitutes a process, and how these are handled by a computer system. 
 
 
+- Just like with deadlocks, threads can experience a _livelock_. This describes when a thread's action is in response to a thread's action and so on, causing threads to stop progress from being too "busy" responding to one another.
+  
+
+- Threads can also experience _starvation_ which describes when a thread cannot accesss its shared resources, halting progress.
+
+
+
+- In addition to `Runnable` there is also `Callable`. This interface defines `call()` method that returns a value.
+
+
 - _Multi-threaded_ refers to a form of parallelization for simultaneous processing. Processors are composed of multiple CPU cores. Work can be divided up between these cores and processed in parallel, thus saving time. 
 
 
 - _Hyper-threaded_ refers to a CPU core that can run multiple threads in parallel. It's a proprietary Intel technology. Intel is moving away from HT implementation for a whole host of reasons, chief among them being security concerns. 
 
 
-- Fun fact: there's a thread permutation known as a _fiber_. What's the difference? Threads rely on the operating system to context switch while fibers will yield their execution to another fiber. For this reason, they're also referred to as _cooperative_ multitasking. Threads utilization is what's known as _preemptive_ multitasking.[¹](#references)
+- Fun fact: there's a thread permutation known as a _fiber_. What's the difference? Threads rely on the operating system to context switch while fibers will yield their execution to another fiber. For this reason, they're also referred to as _cooperative_ multitasking. Threads utilization is what's known as _preemptive_ multitasking.[<sup>7</sup>](#references)
 
 ## Links
 
@@ -122,4 +151,10 @@ What is _synchronization_? Synchronization is the tool we utilize to avoid threa
 
 ## References
 
-1. [MDSN: Fibers](https://docs.microsoft.com/en-us/windows/win32/procthread/fibers?redirectedfrom=MSDN)
+1. _Thank you to Sawyer for the great explanation._ 
+2. [Oracle Java Tutorial: Deadlock](https://docs.oracle.com/javase/tutorial/essential/concurrency/deadlock.html)
+3. [Oracle Java Tutorial: Executors](https://docs.oracle.com/javase/tutorial/essential/concurrency/executors.html)
+4. [Java API Docs: ExecutorService](https://docs.oracle.com/javase/8/docs/api/java/util/concurrent/ExecutorService.html)
+5. [Oracle Java Tutorial: Thread Pools](https://docs.oracle.com/javase/tutorial/essential/concurrency/pools.html)
+6. [StackOverflow: What are worker threads...?](https://stackoverflow.com/questions/13235312/what-are-worker-threads-and-what-is-their-role-in-the-reactor-pattern#:~:text=Worker%20threads%20are%20normal%20threads,a%20thread%2Dpool%20using%20Executors.)
+7. [MDSN: Fibers](https://docs.microsoft.com/en-us/windows/win32/procthread/fibers?redirectedfrom=MSDN)
