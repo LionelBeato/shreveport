@@ -1,3 +1,5 @@
+import java.util.Objects;
+
 public class Entry {
 
     private String firstName;
@@ -49,12 +51,36 @@ public class Entry {
 
     @Override
     public String toString() {
-        return "Entry{" +
-                "firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
-                ", phoneNumber='" + phoneNumber + '\'' +
-                ", emailAddress='" + emailAddress + '\'' +
-                '}';
+//        return "Entry{" +
+//                "firstName='" + firstName + '\'' +
+//                ", lastName='" + lastName + '\'' +
+//                ", phoneNumber='" + phoneNumber + '\'' +
+//                ", emailAddress='" + emailAddress + '\'' +
+//                '}';
+
+        return """
+                |-------------|
+                |    Entry    |
+                |-------------|
+                | first name: %s
+                | last name: %s
+                | phone number: %s
+                | email address: %s
+                """.formatted(firstName, lastName, phoneNumber, emailAddress);
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Entry entry = (Entry) o;
+        return Objects.equals(firstName, entry.firstName) && Objects.equals(lastName, entry.lastName) && Objects.equals(phoneNumber, entry.phoneNumber) && Objects.equals(emailAddress, entry.emailAddress);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(firstName, lastName, phoneNumber, emailAddress);
+    }
+
 
 }
