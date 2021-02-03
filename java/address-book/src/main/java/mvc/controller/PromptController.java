@@ -4,16 +4,19 @@ import mvc.model.prompt.Prompt;
 import mvc.service.PromptService;
 import mvc.service.PromptServiceImpl;
 
+import java.util.Scanner;
+
 public class PromptController {
 
-    private PromptService promptService = new PromptServiceImpl();
-
+    private final PromptService promptService;
     public PromptController(PromptService promptService) {
         this.promptService = promptService;
     }
 
 
-    public void showPrompt(Prompt prompt) {
-        promptService.showPrompt(prompt);
+    public void showPrompt(Prompt prompt, Scanner scanner) {
+        promptService.getPrompt(prompt, scanner);
     }
+
+
 }

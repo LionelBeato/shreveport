@@ -47,11 +47,37 @@ public class AddressBook {
     }
 
     // finding
-    public static Entry findEntry(String email) {
-       return entryList.stream()
-                .filter(entry -> entry.getEmailAddress().equals(email))
-                .findFirst()
-                .orElseThrow();
+    public static Entry findEntry(String queryType, String query) {
+
+        switch(queryType) {
+            case "1" -> {
+                return entryList.stream()
+                        .filter(entry -> entry.getFirstName().contains(query))
+                        .findAny()
+                        .orElseThrow();
+            }
+            case "2" -> {
+                return entryList.stream()
+                        .filter(entry -> entry.getLastName().contains(query))
+                        .findAny()
+                        .orElseThrow();
+            }
+            case "3" -> {
+                return entryList.stream()
+                        .filter(entry -> entry.getPhoneNumber().contains(query))
+                        .findAny()
+                        .orElseThrow();
+            }
+            case "4" -> {
+                return entryList.stream()
+                        .filter(entry -> entry.getEmailAddress().contains(query))
+                        .findAny()
+                        .orElseThrow();
+            }
+            default -> new Entry("", "", "", "");
+        }
+
+        return new Entry("", "", "", "");
     }
 
     // printing

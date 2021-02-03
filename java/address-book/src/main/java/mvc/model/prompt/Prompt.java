@@ -14,4 +14,6 @@ public abstract class Prompt {
 
     }
 
+    public abstract String showPromptText();
+
 }
