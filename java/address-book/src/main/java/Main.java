@@ -2,7 +2,6 @@ import java.util.Scanner;
 
 public class Main {
 
-
     public static void main(String[] args) {
 
         // we can refer to AddressBook directly because its implementations are static
@@ -21,10 +20,8 @@ public class Main {
                         "test@icloud.com")
         );
 
-
         Scanner scanner = new Scanner(System.in);
         Prompts.makeSelection(scanner);
-
 
     }
 

@@ -13,12 +13,33 @@ public class Prompts {
         System.out.print("Please enter an email address: \n");
         var emailAddress = scanner.next();
 
-        System.out.print("Adding entry...\n");
+        System.out.print("Attempting to add entry...\n");
         AddressBook.addEntry(new Entry(firstName, lastName, phoneNumber, emailAddress));
-        System.out.print("Entry added! Sending you to main screen...\n");
         scanner.nextLine();
         makeSelection(scanner);
     }
+
+
+    private static void selectionFive(Scanner scanner) {
+        System.out.printf("selected %s\n", Selections.FIVE);
+        System.out.print("Are you sure? (Y/n)\n");
+        var choice = scanner.next();
+
+        if (choice.equalsIgnoreCase("y")) {
+            AddressBook.removeAll();
+            scanner.nextLine();
+            makeSelection(scanner);
+        } else if (choice.equalsIgnoreCase("n")) {
+            scanner.nextLine();
+            makeSelection(scanner);
+        }
+
+        System.out.print("please try again:\n");
+        scanner.nextLine();
+        selectionFive(scanner);
+
+    }
+
 
     private static void exitSystem() {
         System.exit(0);
@@ -64,24 +85,11 @@ public class Prompts {
                     scanner.nextLine();
                     makeSelection(scanner);
                 }
-                case FIVE -> {
-                    System.out.printf("selected %s\n", Selections.FIVE);
-                    System.out.print("Are you sure? (Y/n)\n");
-                    var choice = scanner.next();
-
-                    if (choice.equalsIgnoreCase("y")) {
-                        AddressBook.removeAll();
-                        scanner.nextLine();
-                        makeSelection(scanner);
-                    } else if (choice.equalsIgnoreCase("n")) {
-                        scanner.nextLine();
-                        makeSelection(scanner);
-                    }
-                }
+                case FIVE -> selectionFive(scanner);
                 case SIX ->  exitSystem();
                 default -> throw new InputMismatchException();
-
             }
+
         } catch (InputMismatchException e) {
             e.printStackTrace();
             System.out.print("Bad selection, try again!\n");

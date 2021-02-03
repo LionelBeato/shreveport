@@ -7,15 +7,25 @@ import java.util.List;
 public class AddressBook {
 
     // field: an ArrayList of generic type Entries
-
    private static List<Entry> entryList = new ArrayList<>();
 
     // methods: ways to manipulate the array list
 
     // add method
     public static void addEntry( Entry entry) {
-        entryList.add(entry);
-        System.out.println(entry);
+        // for loop, essentially
+        // this returns true if my email is not unique
+        var isNotUnique = entryList.stream()
+                .anyMatch(e -> e.getEmailAddress().equals(entry.getEmailAddress()));
+
+        if (isNotUnique) {
+            System.out.print("Please add an entry with a unique email!\n");
+        }  else {
+            entryList.add(entry);
+            System.out.println(entry);
+            System.out.print("Entry added! Sending you to main screen...\n");
+        }
+
     }
 
     public static void addAll(Entry... args) {
@@ -23,7 +33,6 @@ public class AddressBook {
     }
 
     // delete
-
     public static String removeEntry(Entry entry) {
         var wasDeleted = entryList.remove(entry);
         if (wasDeleted) {
@@ -37,8 +46,6 @@ public class AddressBook {
         System.out.print("Address Book was cleared!\n");
     }
 
-
-
     // finding
     public static Entry findEntry(String email) {
        return entryList.stream()
@@ -47,11 +54,10 @@ public class AddressBook {
                 .orElseThrow();
     }
 
-
-
     // printing
-
     public static void printAll() {
+        // System.out::println is a method reference
+        // its a shorter way of saying e -> System.out.println(e)
          entryList.forEach(System.out::println);
     }
 

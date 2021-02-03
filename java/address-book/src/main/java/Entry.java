@@ -51,17 +51,14 @@ public class Entry {
 
     @Override
     public String toString() {
-//        return "Entry{" +
-//                "firstName='" + firstName + '\'' +
-//                ", lastName='" + lastName + '\'' +
-//                ", phoneNumber='" + phoneNumber + '\'' +
-//                ", emailAddress='" + emailAddress + '\'' +
-//                '}';
-
+        // below is a text block
+        // we can use triple double-quotes to make them
+        // text blocks do not need escape characters
+        // they can still use formatting!
         return """
-                |-------------|
-                |    Entry    |
-                |-------------|
+                |-------------
+                |    Entry    
+                |-------------
                 | first name: %s
                 | last name: %s
                 | phone number: %s
@@ -81,6 +78,5 @@ public class Entry {
     public int hashCode() {
         return Objects.hash(firstName, lastName, phoneNumber, emailAddress);
     }
-
 
 }
