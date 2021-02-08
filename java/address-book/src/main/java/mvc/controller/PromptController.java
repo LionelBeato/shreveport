@@ -13,10 +13,9 @@ public class PromptController {
         this.promptService = promptService;
     }
 
-
+    // prompts should return prompts based on input
     public void showPrompt(Prompt prompt, Scanner scanner) {
         promptService.getPrompt(prompt, scanner);
     }
-
 
 }

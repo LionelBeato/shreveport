@@ -2,19 +2,30 @@ package mvc.model.prompt;
 
 import mvc.model.Selections;
 
-public class MainPrompt extends Prompt {
+public class MainPrompt implements Prompt<String> {
+
+    private static MainPrompt instance = null;
+
+    private MainPrompt() {
+
+    }
 
 
+    public static MainPrompt getInstance() {
+        if (instance == null) {
+            instance = new MainPrompt();
+        }
+        return instance;
+    }
 
+    @Override
     public String showPromptText() {
 
-        var options =
-                """
-                
-                Here are your options:
-                %s%s%s%s%s%s
-                """.formatted((Object[]) Selections.values());
-
-        return options;
+        return """
+        Here are your options:
+        %s%s%s%s%s%s
+        """.formatted((Object[]) Selections.values());
     }
+
+
 }

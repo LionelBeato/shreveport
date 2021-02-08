@@ -9,14 +9,21 @@ import java.util.List;
 public class AddressBook {
 
     // field: an ArrayList of generic type Entries
-   private final List<Entry> entryList;
-
-   public AddressBook(List<Entry> entryList) {
-       this.entryList = entryList;
-   }
+   private final List<Entry> entryList = new ArrayList<>();
+   private static AddressBook instance = null;
 
     public List<Entry> getEntryList() {
         return entryList;
+    }
+
+    private AddressBook() {
+   }
+
+    static public AddressBook getInstance() {
+       if (instance == null) {
+           instance = new AddressBook();
+       }
+       return instance;
     }
 
     /* the instructions state that AddressBook should handle quitting the program

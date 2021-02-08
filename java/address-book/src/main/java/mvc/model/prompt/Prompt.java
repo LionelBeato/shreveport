@@ -2,18 +2,17 @@ package mvc.model.prompt;
 
 import java.util.Scanner;
 
-public abstract class Prompt {
+public interface Prompt <T> {
 
-    private String promptText;
-
-    public void exitProgram() {
+    default void exitProgram() {
+        System.out.println("Shutting down...");
         System.exit(0);
     }
 
-    public void returnToMainMenu() {
+    default void returnToMainMenu() {
 
     }
 
-    public abstract String showPromptText();
+    T showPromptText();
 
 }

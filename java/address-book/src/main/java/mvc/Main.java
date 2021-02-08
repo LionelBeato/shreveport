@@ -13,9 +13,10 @@ public class Main {
     private static final PromptController promptController = new PromptController(promptService);
     private static Scanner scanner = new Scanner(System.in);
 
-    public static void main(String[] args) {
 
-       promptController.showPrompt(new MainPrompt(), scanner);
+    public static void main(String[] args) {
+        // Main Screen: shows your options
+       promptController.showPrompt(MainPrompt.getInstance(), scanner);
 
     }
 }

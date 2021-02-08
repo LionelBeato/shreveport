@@ -6,6 +6,7 @@ import java.util.Scanner;
 
 public interface PromptService {
 
-    Prompt getPrompt(Prompt prompt, Scanner scanner);
+    // Prompts should always produce another Prompt
+    void getPrompt(Prompt prompt, Scanner scanner);
 
 }

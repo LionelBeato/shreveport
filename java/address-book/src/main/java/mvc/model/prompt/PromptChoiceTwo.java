@@ -1,6 +1,6 @@
 package mvc.model.prompt;
 
-public class PromptChoiceTwo extends Prompt {
+public class PromptChoiceTwo implements Prompt {
 
     @Override
     public String showPromptText() {

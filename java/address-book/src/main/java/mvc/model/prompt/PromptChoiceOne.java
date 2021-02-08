@@ -1,8 +1,11 @@
 package mvc.model.prompt;
 
-public class PromptChoiceOne extends Prompt {
+public class PromptChoiceOne implements Prompt {
+
     @Override
     public String showPromptText() {
         return "";
     }
+
 }
+
