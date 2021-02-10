@@ -11,7 +11,7 @@ import javax.persistence.Id;
 public class BlogPost {
 
     // @Id is used to identify primary keys on entities
-    // @GeneratedValue is used to autogeneration of said keys
+    // @GeneratedValue is used to autogenerate of said keys
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
