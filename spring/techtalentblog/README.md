@@ -71,11 +71,7 @@ public interface BlogPostRepository extends CrudRepository<BlogPost, Long> {
 
 ## The Controller
 
-Now we need to build our controller. In the package `controller`, create a new class named `BlogPostController`. This class will handle all the routing, requests, and responses for our application's `BlogPost` model. 
-
-## View
-
-For the view we will be utilizing thymeleaf. Recall that thymeleaf is a templating solution to render data in an HTML file from our back end. Since we are utilizing templates, we will need to create our pages under `resources/templates`. There, create a directory named `blogpost`. Inside of `blogpost`, create two html files: `index` and `result`. Add `@Controller` onto your class definition and implement the following code:
+Now we need to build our controller. In the package `controller`, create a new class named `BlogPostController`. This class will handle all the routing, requests, and responses for our application's `BlogPost` model. Add `@Controller` onto your class definition and implement the following code:
 
 ```java
     private BlogPostRepository blogPostRepository;
@@ -89,7 +85,7 @@ For the view we will be utilizing thymeleaf. Recall that thymeleaf is a templati
 
 Above is an example of dependency injection. `@Autowired` is not needed when we are utilizing only _one_ dependency with a constructor based injection. 
 
-Now we add our methods for to resolve our views and perform a `post`:
+Now we add our methods to resolve our views and perform a `post`:
 
 ```java
     @GetMapping("/")
@@ -113,6 +109,10 @@ Now we add our methods for to resolve our views and perform a `post`:
         return "blogpost/result";
     }
 ```
+
+## View
+
+For the view we will be utilizing thymeleaf. Recall that thymeleaf is a templating solution to render data in an HTML file from our back end. Since we are utilizing templates, we will need to create our pages under `resources/templates`. There, create a directory named `blogpost`. Inside of `blogpost`, create two html files: `index` and `result`.
 
 `index.html` will look like so:
 
@@ -174,14 +174,13 @@ Additionally, `result.html` will look like so:
 </html>
 ```
 
-## Test
+[comment]: <> (## Test)
 
-Hello world. I like to [Google][1].
+[comment]: <> (Hello world. I like to [Google][1].)
 
 ## Links
 
-- [1]: http:google.com "Google"
+[comment]: <> (- [1]: http:google.com "Google")
 - [Baeldung: Properties with Spring](https://www.baeldung.com/properties-with-spring)
 - [Baeldung: Spring-Boot H2 Database](https://www.baeldung.com/spring-boot-h2-database)
-
-[comment]: <> (find likn)
+- [Spring Initializer](https://www.start.spring.io)
