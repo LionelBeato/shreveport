@@ -66,7 +66,6 @@ public class BlogPost {
                 '}';
     }
 
-
     // additionally, you should override .hashcode() and .equals()
     // hashcode
     // equals

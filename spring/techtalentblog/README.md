@@ -71,11 +71,48 @@ public interface BlogPostRepository extends CrudRepository<BlogPost, Long> {
 
 ## The Controller
 
-Controller stuff blah blah blah 
+Now we need to build our controller. In the package `controller`, create a new class named `BlogPostController`. This class will handle all the routing, requests, and responses for our application's `BlogPost` model. 
 
 ## View
 
-For the view we will be utilizing thymeleaf. Recall that thymeleaf is a templating solution to render data in an html file from our back end. Since we are utilizing templates, we will need to create our pages under `resources/templates`. There, create a directory named `blogpost`. Inside of `blogpost`, create two html files: `index` and `result`.
+For the view we will be utilizing thymeleaf. Recall that thymeleaf is a templating solution to render data in an HTML file from our back end. Since we are utilizing templates, we will need to create our pages under `resources/templates`. There, create a directory named `blogpost`. Inside of `blogpost`, create two html files: `index` and `result`. Add `@Controller` onto your class definition and implement the following code:
+
+```java
+    private BlogPostRepository blogPostRepository;
+
+    // below is a constructor based dependency injection
+    // if you only have one dependency, this is considered best practice
+    public BlogPostController(BlogPostRepository blogPostRepository ) {
+        this.blogPostRepository = blogPostRepository;
+    }
+```
+
+Above is an example of dependency injection. `@Autowired` is not needed when we are utilizing only _one_ dependency with a constructor based injection. 
+
+Now we add our methods for to resolve our views and perform a `post`:
+
+```java
+    @GetMapping("/")
+    public String index(BlogPost blogPost) {
+        // since we are utilizing thymeleaf
+        // our output will be generated in a template
+        // returning a reference to said template
+        // will allow us to show the data that we want
+        return "blogpost/index";
+    }
+
+    // this is where we are mapping our post request in our project
+    @PostMapping("/")
+    public String addNewBlogPost(BlogPost blogPost, Model model) {
+        // blogPost from our parameter is the object we're getting from
+        // the thymeleaf form, we can simple save it in our repository
+        blogPostRepository.save(blogPost);
+        model.addAttribute("title",blogPost.getTitle());
+        model.addAttribute("author",blogPost.getAuthor());
+        model.addAttribute("blogEntry",blogPost.getBlogEntry());
+        return "blogpost/result";
+    }
+```
 
 `index.html` will look like so:
 
@@ -137,9 +174,14 @@ Additionally, `result.html` will look like so:
 </html>
 ```
 
+## Test
 
+Hello world. I like to [Google][1].
 
 ## Links
 
+- [1]: http:google.com "Google"
 - [Baeldung: Properties with Spring](https://www.baeldung.com/properties-with-spring)
 - [Baeldung: Spring-Boot H2 Database](https://www.baeldung.com/spring-boot-h2-database)
+
+[comment]: <> (find likn)
