@@ -8,8 +8,16 @@ import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.Set;
 
 @Data
+         /*
+
+          this annotation is a quick way of implementing the builder pattern
+          https://www.baeldung.com/creational-design-patterns#builder
+
+          */
+
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
@@ -30,4 +38,10 @@ public class User {
 
     @CreationTimestamp
     private Date createdAt;
+
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"),
+    inverseJoinColumns = @JoinColumn(name = "role_id"))
+    // TODO(): Create Role class
+    private Set<Role> roles;
 }
