@@ -31,7 +31,22 @@ public class AuthorizationController {
                                 BindingResult bindingResult,
                                 Model model) {
 
+        User userExists = userService.findByUsername(user.getUsername());
 
+        if (userExists != null) {
+            bindingResult.rejectValue("username",
+                    "error.user",
+                    "Username is already taken");
+        }
+
+        if (!bindingResult.hasErrors()) {
+            userService.saveNewUser(user);
+            model.addAttribute("success",
+                    "Sign up successful!");
+            model.addAttribute("user", new User());
+        }
+
+        return "registration";
     }
 
 }

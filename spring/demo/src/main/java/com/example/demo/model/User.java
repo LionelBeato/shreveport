@@ -11,13 +11,11 @@ import java.util.Date;
 import java.util.Set;
 
 @Data
-         /*
+ /*
 
-          this annotation is a quick way of implementing the builder pattern
-          https://www.baeldung.com/creational-design-patterns#builder
-
-          */
-
+this annotation is a quick way of implementing the builder pattern
+ https://www.baeldung.com/creational-design-patterns#builder
+  */
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
