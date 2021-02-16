@@ -15,17 +15,30 @@
 
 <div id="authenticated" style="display: none">
     Hello <span id="user"></span>
+    <button onClick="logout()" class="btn btn-primary">Logout</button>
 </div>
 
 <script>
+
+    async function logout() {
+        let response = await fetch('/logout');
+        if (response.ok) {
+            document.getElementById("unauthenticated").style.display = "block";
+            document.getElementById("authenticated").style.display = "none";
+        }
+        else {
+            return null;
+        }
+
+    }
 
     async function checkLoggedIn() {
             let response = await fetch('/user');
             if (response.ok) {
                 let userInfo = await response.json();
-                document.getElementById("user").innerHTML = userInfo.name;
-                document.getElementById("unauthenticated").innerHTML = "none";
-                document.getElementById("authenticated").innerHTML = "block";
+                document.getElementById("user").innerHTML = userInfo.login;
+                document.getElementById("unauthenticated").style.display = "none";
+                document.getElementById("authenticated").style.display = "block";
             } else {
                 document.getElementById("unauthenticated").style.display = "block";
                 document.getElementById("authenticated").style.display = "none";
