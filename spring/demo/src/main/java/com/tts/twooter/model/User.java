@@ -1,4 +1,4 @@
-package com.example.demo.model;
+package com.tts.twooter.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -28,9 +28,11 @@ public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    // below we are defining the name of the column in our database for this field
     @Column(name = "user_id")
     private Long id;
 
+    // @Email, @NotEmpty, @Pattern, @Length are field constraints on our model
     @Email(message = "Please provide a valid email")
     @NotEmpty(message = "Please provide an email")
     private String email;
@@ -49,9 +51,11 @@ public class User {
 
     private int active;
 
+    // hibernate annotation that will autogenerate a creation timestamp
     @CreationTimestamp
     private Date createdAt;
 
+    // @ManyToMany is a javax annotation that will define a relationship
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"),
     inverseJoinColumns = @JoinColumn(name = "role_id"))

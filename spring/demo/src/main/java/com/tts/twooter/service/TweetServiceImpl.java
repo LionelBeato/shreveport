@@ -1,11 +1,12 @@
-package com.example.demo.service;
+package com.tts.twooter.service;
 
-import com.example.demo.model.Tweet;
-import com.example.demo.model.User;
-import com.example.demo.repository.TweetRepository;
+import com.tts.twooter.model.Tweet;
+import com.tts.twooter.model.User;
+import com.tts.twooter.repository.TweetRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class TweetServiceImpl implements TweetService {
@@ -38,4 +39,12 @@ public class TweetServiceImpl implements TweetService {
     public void save(Tweet tweet) {
         tweetRepository.save(tweet);
     }
+
+    // optional method, does not need to be implemented
+    // mostly here for testing
+    @Override
+    public Optional<Tweet> findById(Long id) {
+        return tweetRepository.findById(id);
+    }
+
 }

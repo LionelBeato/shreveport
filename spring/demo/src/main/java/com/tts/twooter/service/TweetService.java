@@ -1,10 +1,11 @@
-package com.example.demo.service;
+package com.tts.twooter.service;
 
 
-import com.example.demo.model.Tweet;
-import com.example.demo.model.User;
+import com.tts.twooter.model.Tweet;
+import com.tts.twooter.model.User;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface TweetService {
 
@@ -12,5 +13,6 @@ public interface TweetService {
     List<Tweet> findAllByUser(User user);
     List<Tweet> findAllByUsers(List<User> users);
     void save(Tweet tweet);
+    Optional<Tweet> findById(Long id);
 
 }

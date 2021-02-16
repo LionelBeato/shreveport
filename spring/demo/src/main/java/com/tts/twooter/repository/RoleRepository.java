@@ -1,6 +1,6 @@
-package com.example.demo.repository;
+package com.tts.twooter.repository;
 
-import com.example.demo.model.Role;
+import com.tts.twooter.model.Role;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 

@@ -1,4 +1,4 @@
-package com.example.demo.configuration;
+package com.tts.twooter.configuration;
 
 
 import org.springframework.beans.factory.annotation.Autowired;

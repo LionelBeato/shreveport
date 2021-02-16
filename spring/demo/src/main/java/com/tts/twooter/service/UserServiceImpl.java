@@ -1,9 +1,9 @@
-package com.example.demo.service;
+package com.tts.twooter.service;
 
-import com.example.demo.model.Role;
-import com.example.demo.model.User;
-import com.example.demo.repository.RoleRepository;
-import com.example.demo.repository.UserRepository;
+import com.tts.twooter.model.Role;
+import com.tts.twooter.model.User;
+import com.tts.twooter.repository.RoleRepository;
+import com.tts.twooter.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;

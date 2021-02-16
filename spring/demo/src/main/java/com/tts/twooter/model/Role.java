@@ -1,4 +1,4 @@
-package com.example.demo.model;
+package com.tts.twooter.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

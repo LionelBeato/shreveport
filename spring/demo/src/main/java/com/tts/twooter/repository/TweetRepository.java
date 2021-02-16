@@ -1,7 +1,7 @@
-package com.example.demo.repository;
+package com.tts.twooter.repository;
 
-import com.example.demo.model.Tweet;
-import com.example.demo.model.User;
+import com.tts.twooter.model.Tweet;
+import com.tts.twooter.model.User;
 import org.springframework.data.repository.CrudRepository;
 
 import java.util.List;

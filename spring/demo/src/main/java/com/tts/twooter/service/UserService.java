@@ -1,6 +1,6 @@
-package com.example.demo.service;
+package com.tts.twooter.service;
 
-import com.example.demo.model.User;
+import com.tts.twooter.model.User;
 
 import java.util.List;
 
