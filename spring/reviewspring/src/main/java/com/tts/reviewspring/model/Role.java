@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.Collection;
 
 
 @Data
@@ -20,5 +21,8 @@ public class Role {
     @Column(name = "role_id")
     private Long id;
     private String role;
+
+    @ManyToMany(mappedBy = "roles")
+    private Collection<User> users;
 
 }

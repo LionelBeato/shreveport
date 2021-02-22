@@ -19,7 +19,7 @@ public class TweetServiceImpl implements TweetService{
 
     @Override
     public List<Tweet> findAll() {
-        return tweetRepository.findAllByOrderByCreatedDesc();
+        return tweetRepository.findAllByOrderByCreatedAtDesc();
     }
 
     @Override
