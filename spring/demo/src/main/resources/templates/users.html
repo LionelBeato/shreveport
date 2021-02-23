@@ -1,8 +1,10 @@
 <!DOCTYPE html>
+<!-- TODO(): Update spring security to version 5 -->
 <html xmlns:th="https://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+
 <head>
-    <title>Users</title>
+    <title>User</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css">
     <link rel="stylesheet" href="/custom.css">
@@ -12,24 +14,41 @@
 </head>
 
 <body>
-
-<div class="container">
+<div class="container-fluid">
     <div th:replace="fragments/navbar"></div>
-    <h2>Users</h2>
-    <div class="list-group" th:each="user:${users}">
-    <a th:href="@{/users/} + ${user.username}" class="list-group-item list-group-item-action">
-        <div class="row">
-            <div class="col col-sm-6">
-                <h5 class="mb-1" style="color: #00aced"><i class="fab fa-twitter"></i> @<span th:text="${user.username}"></span></h5>
-                <h5 class="mb-1"><span th:text="${user.firstName}"></span> <span th:text="${user.lastName}"></span></h5>
-            </div>
-            <div class="col col-sm-2 col-sm-offset-4 text-right">
-                <h5 class="mb-1"><span th:text="${tweetCounts.get(user.username)}"></span> tweets</h5>
-            </div>
-        </div>
-    </a>
-</div>
-</div>
+    <div class="container">
+        <h2>Users</h2>
+        <div class="list-group" th:each="user:${users}">
+            <a th:href="@{/users/} + ${user.username}" class="list-group-item list-group-item-action">
+                <div class="row">
+                    <div class="col col-sm-6">
+                        <h5 class="mb-1" style="color: #00aced"><i class="fab fa-twitter"></i> @<span th:text="${user.username}"></span></h5>
+                        <h5 class="mb-1"><span th:text="${user.firstName}"></span> <span th:text="${user.lastName}"></span> <span th:if="${!followingStatus.containsKey(user.username)}">(Me)</span></h5></h5>
+                    </div>
+                    <div class="col col-sm-2 col-sm-offset-4 text-right">
+                        <h5 class="mb-1"><span th:text="${tweetCounts.get(user.username)}"></span> tweets</h5>
 
+                        <form th:action="@{/follow/} + ${user.username}" th:if="${followingStatus.containsKey(user.username)
+				&& !followingStatus.get(user.username)}" method="post">
+
+                            <button style="float:right" type="Submit" class="btn btn-md btn-success">Follow</button>
+
+                        </form>
+
+                        <form th:action="@{/unfollow/} + ${user.username}" th:if="${followingStatus.containsKey(user.username)
+				&& followingStatus.get(user.username)}" method="post">
+
+                            <button style="float:right" type="Submit" class="btn btn-md btn-primary unfollow_btn">Following</button>
+
+                        </form>
+                    </div>
+                </div>
+            </a>
+        </div>
+    </div>
+</div>
 </body>
 </html>
+
+
+
