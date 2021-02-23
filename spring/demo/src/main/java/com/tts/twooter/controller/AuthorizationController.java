@@ -49,4 +49,10 @@ public class AuthorizationController {
         return "registration";
     }
 
+
+    @GetMapping("/login")
+    public String login() {
+        return "login";
+    }
+
 }
