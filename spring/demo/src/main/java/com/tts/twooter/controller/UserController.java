@@ -5,6 +5,7 @@ import com.tts.twooter.model.User;
 import com.tts.twooter.service.TweetService;
 import com.tts.twooter.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import java.util.HashMap;
 import java.util.List;
 
+@Controller
 public class UserController {
 
     @Autowired
@@ -27,6 +29,23 @@ public class UserController {
         User user = userService.findByUsername(username);
         // find tweets from user
         List<Tweet> tweets = tweetService.findAllByUser(user);
+
+        User loggedInUSer = userService.getLoggedInUser();
+        List<User> following = loggedInUSer.getFollowing();
+        boolean isFollowing = false;
+
+
+
+        for (User followedUser : following) {
+            if (followedUser.getUsername().equals(username)) {
+                isFollowing = true;
+            }
+        }
+
+        boolean isSelfPage = loggedInUSer.getUsername().equals(username);
+
+        model.addAttribute("isSelfPage", isSelfPage);
+        model.addAttribute("following", isFollowing);
         model.addAttribute("user", user);
         model.addAttribute("tweetList", tweets);
         return "user";
@@ -34,7 +53,6 @@ public class UserController {
 
     @GetMapping(value = "/users")
     public String getUsers(Model model) {
-
         List<User> users = userService.findAll();
         model.addAttribute("users", users);
         setTweetCounts(users, model);
@@ -47,7 +65,7 @@ public class UserController {
             List<Tweet> tweets = tweetService.findAllByUser(user);
             tweetCounts.put(user.getUsername(), tweets.size());
         }
-        model.addAttribute("tweetCount", tweetCounts);
+        model.addAttribute("tweetCounts", tweetCounts);
     }
 
 }
