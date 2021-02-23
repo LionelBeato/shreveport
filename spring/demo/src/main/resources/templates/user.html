@@ -15,22 +15,23 @@
 
 <body>
 
-<div class="container">
+<div class="container-fluid">
     <div th:replace="fragments/navbar"></div>
 
-<h2>
-    Profile for<span th:text="${user.firstName}"></span>
-    <span th:text="${user.lastName}"></span> -
-    <span style="color: #00aced">
+    <div class="container">
+        <h2>
+            Profile for<span th:text="${user.firstName}"></span>
+            <span th:text="${user.lastName}"></span> -
+            <span style="color: #00aced">
         @<span th:text="${user.username}"></span>
     </span>
-</h2>
+        </h2>
 
-<h5>
-    Joined <span th:text="${#dates.format(user.createdAt, 'MMMM dd, yyyy')}"></span>
-</h5>
+        <h5>
+            Joined <span th:text="${#dates.format(user.createdAt, 'MMMM dd, yyyy')}"></span>
+        </h5>
 
-<span th:if="${!isSelfPage}">
+        <span th:if="${!isSelfPage}">
 
     <form th:action="@{/follow/} + ${user.username}" th:if="${!following}" method="post">
         <button style="float:right" type="Submit" class="btn btn-lg btn-success">Follow</button>
@@ -39,29 +40,23 @@
         <button style="float:right" type="Submit" class="btn btn-lg btn-primary unfollow_btn">Following</button>
     </form>
 </span>
-
-
-<div th:if="${not #lists.isEmpty(tweetList)}">
-
-<h3>Tweets</h3>
-<div class="list-group" th:each="tweet:${tweetList}">
-    <div class="list-group-item list-group-item-action">
-        <div class="d-flex w-100 justify-content-between">
-            <h5>@<span th:text="${tweet.user.username}"></span>
-                <small><span th:text="${#dates.format(tweet.createdAt, 'M/d/yy')}"></span></small></h5>
+        <div th:if="${not #lists.isEmpty(tweetList)}">
+            <h3>Tweets</h3>
+            <div class="list-group" th:each="tweet:${tweetList}">
+                <div class="list-group-item list-group-item-action">
+                    <div class="d-flex w-100 justify-content-between">
+                        <h5>@<span th:text="${tweet.user.username}"></span>
+                            <small><span th:text="${#dates.format(tweet.createdAt, 'M/d/yy')}"></span></small></h5>
+                    </div>
+                    <p class="mb-1" th:utext="${tweet.message}"></p>
+                </div>
+            </div>
         </div>
-        <p class="mb-1" th:utext="${tweet.message}"></p>
+        <div th:if="${#lists.isEmpty(tweetList)}">
+            <h3>No recent tweets</h3>
+        </div>
     </div>
 </div>
-
-</div>
-
-<div th:if="${#lists.isEmpty(tweetList)}">
-    <h3>No recent tweets</h3>
-</div>
-
-</div>
-
 
 
 </body>
