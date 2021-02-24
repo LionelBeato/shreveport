@@ -17,15 +17,31 @@
 <div class="container-fluid">
     <div th:replace="fragments/navbar"></div>
 
-<div class="container">
-    <h2>Tweets</h2>
-    <div th:each="tweet:${tweetList}">
-        <h5>@<span th:text="${tweet.user.username}"></span>
-        <small><span th:text="${#dates.format(tweet.createdAt, 'M/d/yy')}"></span></small>
-        </h5>
-        <p th:utext="${tweet.message}"></p>
+    <ul class="nav nav-tabs">
+        <li role="presentation" th:classappend="${filter == 'all' ? 'active' : '' }">
+            <a href="/tweets">All</a></li>
+        <li role="presentation" th:classappend="${filter == 'following' ? 'active' : '' }">
+            <a href="/tweets?filter=following">Following</a></li>
+    </ul>
+    <br/>
+
+
+    <div class="container">
+        <h2>Tweets</h2>
+        <div th:each="tweet:${tweetList}">
+            <h5>@<span th:text="${tweet.user.username}"></span>
+                <small><span th:text="${tweet.date}"></span></small>
+            </h5>
+            <p th:utext="${tweet.message}"></p>
+        </div>
     </div>
 </div>
+
+<div th:if="${#lists.isEmpty(tweetList) and filter == 'all'}">
+    <h3>No tweets have been created yet</h3>
+</div>
+<div th:if="${#lists.isEmpty(tweetList) and filter == 'following'}">
+    <h3>No tweets have been created by your followers</h3>
 </div>
 
 </body>

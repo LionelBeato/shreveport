@@ -2,13 +2,17 @@ package com.tts.twooter.service;
 
 import com.tts.twooter.model.Tag;
 import com.tts.twooter.model.Tweet;
+import com.tts.twooter.model.TweetDisplay;
 import com.tts.twooter.model.User;
 import com.tts.twooter.repository.TagRepository;
 import com.tts.twooter.repository.TweetRepository;
+import org.ocpsoft.prettytime.PrettyTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.text.SimpleDateFormat;
 import java.util.*;
+import java.util.concurrent.TimeUnit;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -25,21 +29,21 @@ public class TweetServiceImpl implements TweetService {
     }
 
     @Override
-    public List<Tweet> findAll() {
+    public List<TweetDisplay> findAll() {
         List<Tweet> tweets = tweetRepository.findAllByOrderByCreatedAtDesc();
         return formatTweets(tweets);
     }
 
     @Override
-    public List<Tweet> findAllByUser(User user) {
+    public List<TweetDisplay> findAllByUser(User user) {
         List<Tweet> tweets = tweetRepository.findAllByUserOrderByCreatedAtDesc(user);
-        return tweets;
+        return formatTweets(tweets);
     }
 
     @Override
-    public List<Tweet> findAllByUsers(List<User> users) {
+    public List<TweetDisplay> findAllByUsers(List<User> users) {
         List<Tweet> tweets = tweetRepository.findAllByUserInOrderByCreatedAtDesc(users);
-        return tweets;
+        return formatTweets(tweets);
     }
 
     @Override
@@ -56,7 +60,7 @@ public class TweetServiceImpl implements TweetService {
     }
 
     @Override
-    public List<Tweet> findAllWithTag(String tag) {
+    public List<TweetDisplay> findAllWithTag(String tag) {
         List<Tweet> tweets = tweetRepository.findByTags_PhraseOrderByCreatedAtDesc(tag);
         return formatTweets(tweets);
     }
@@ -81,10 +85,11 @@ public class TweetServiceImpl implements TweetService {
     }
 
     @Override
-    public List<Tweet> formatTweets(List<Tweet> tweets) {
+    public List<TweetDisplay> formatTweets(List<Tweet> tweets) {
         addTagLinks(tweets);
         shortenLinks(tweets);
-        return tweets;
+        List<TweetDisplay> displayTweets = formatTimestamps(tweets);
+        return displayTweets;
     }
 
     @Override
@@ -125,6 +130,31 @@ public class TweetServiceImpl implements TweetService {
 
         }
 
+    }
+
+    @Override
+    public List<TweetDisplay> formatTimestamps(List<Tweet> tweets) {
+        List<TweetDisplay> response = new ArrayList<>();
+        PrettyTime prettyTime = new PrettyTime();
+        SimpleDateFormat simpleDate = new SimpleDateFormat("M/d/yy");
+        Date now = new Date();
+
+        for (Tweet tweet: tweets) {
+            TweetDisplay tweetDisplay = new TweetDisplay();
+            tweetDisplay.setUser(tweet.getUser());
+            tweetDisplay.setMessage(tweet.getMessage());
+            tweetDisplay.setTags(tweet.getTags());
+            // Math.abs return the absolute value of the given argument
+            long diffinMillies = Math.abs(now.getTime() - tweet.getCreatedAt().getTime());
+            long diff = TimeUnit.DAYS.convert(diffinMillies, TimeUnit.MILLISECONDS);
+            if (diff > 3) {
+                tweetDisplay.setDate(simpleDate.format(tweet.getCreatedAt()));
+            } else {
+                tweetDisplay.setDate(prettyTime.format(tweet.getCreatedAt()));
+            }
+            response.add(tweetDisplay);
+        }
+        return response;
     }
 
 }
