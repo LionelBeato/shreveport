@@ -4,6 +4,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.validation.constraints.Size;
 
 @Entity
 public class Crystal {
@@ -12,6 +13,7 @@ public class Crystal {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String color;
+    @Size(max=20)
     private String name;
 
     public String getColor() {
