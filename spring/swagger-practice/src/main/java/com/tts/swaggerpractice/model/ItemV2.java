@@ -5,7 +5,7 @@ import io.swagger.annotations.ApiModelProperty;
 import java.util.Date;
 import java.util.List;
 
-public class Item {
+public class ItemV2 {
     @ApiModelProperty(notes = "The name of the menu item" )
     private String name;
     @ApiModelProperty(notes = "The description of the menu item" )
@@ -21,6 +21,16 @@ public class Item {
     private Date createdDate;
     @ApiModelProperty(notes = "The last updated date of the menu item" )
     private Date updatedDate;
+    @ApiModelProperty(notes = "denotes if the item is vegetarian or not")
+    private Boolean isVegetarian;
+
+    public Boolean getVegetarian() {
+        return isVegetarian;
+    }
+
+    public void setVegetarian(Boolean vegetarian) {
+        isVegetarian = vegetarian;
+    }
 
     public String getName() {
         return name;
@@ -78,7 +88,7 @@ public class Item {
         this.updatedDate = updatedDate;
     }
 
-    public Item(String name, String description, String category, List<String> ingredients, double price, Date createdDate, Date updatedDate) {
+    public ItemV2(String name, String description, String category, List<String> ingredients, double price, Date createdDate, Date updatedDate, Boolean isVegetarian) {
         this.name = name;
         this.description = description;
         this.category = category;
@@ -86,9 +96,10 @@ public class Item {
         this.price = price;
         this.createdDate = createdDate;
         this.updatedDate = updatedDate;
+        this.isVegetarian = isVegetarian;
     }
 
-    public Item() {
+    public ItemV2() {
     }
 
 

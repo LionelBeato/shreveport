@@ -18,20 +18,43 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 public class SwaggerConfig {
 
     @Bean
-    public Docket api() {
+    public Docket apiV1() {
         return new Docket(DocumentationType.SWAGGER_2)
+                .groupName("Version 1")
                 .select()
                 .apis(RequestHandlerSelectors.basePackage("com.tts.swaggerpractice"))
-                .paths(PathSelectors.any())
+                .paths(PathSelectors.ant("/v1/**"))
                 .build()
-                .apiInfo(buildApiInfo());
+                .apiInfo(buildApiInfoV1());
     }
 
-    private ApiInfo buildApiInfo() {
+    private ApiInfo buildApiInfoV1() {
         return new ApiInfoBuilder()
                 .title("Menu Items API")
                 .description("REST API for interacting with menu items")
                 .version("1.0.0")
+                .contact(new Contact("Lionel Beato", "lionel.works", "beato@lionel.works"))
+                .license("Apache License Version 2.0")
+                .license("https://www.apache.org/licenses/LICENSE-2.0")
+                .build();
+    }
+
+    @Bean
+    public Docket apiV2() {
+        return new Docket(DocumentationType.SWAGGER_2)
+                .groupName("Version 2")
+                .select()
+                .apis(RequestHandlerSelectors.basePackage("com.tts.swaggerpractice"))
+                .paths(PathSelectors.ant("/v2/**"))
+                .build()
+                .apiInfo(buildApiInfoV2());
+    }
+
+    private ApiInfo buildApiInfoV2() {
+        return new ApiInfoBuilder()
+                .title("Menu Items API")
+                .description("REST API for interacting with menu items")
+                .version("2.0.0")
                 .contact(new Contact("Lionel Beato", "lionel.works", "beato@lionel.works"))
                 .license("Apache License Version 2.0")
                 .license("https://www.apache.org/licenses/LICENSE-2.0")
