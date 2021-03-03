@@ -9,6 +9,9 @@ import springfox.documentation.service.ApiInfo;
 import springfox.documentation.service.Contact;
 import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
+import springfox.documentation.swagger.web.DocExpansion;
+import springfox.documentation.swagger.web.UiConfiguration;
+import springfox.documentation.swagger.web.UiConfigurationBuilder;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 @Configuration
@@ -29,9 +32,16 @@ public class SwaggerConfig {
                 .title("Menu Items API")
                 .description("REST API for interacting with menu items")
                 .version("1.0.0")
-                .contact(new Contact("Developer name", "website.com", "developer@website.com"))
+                .contact(new Contact("Lionel Beato", "lionel.works", "beato@lionel.works"))
                 .license("Apache License Version 2.0")
                 .license("https://www.apache.org/licenses/LICENSE-2.0")
+                .build();
+    }
+
+    @Bean
+    public UiConfiguration buildUIConfig() {
+        return UiConfigurationBuilder.builder()
+                .docExpansion(DocExpansion.FULL)
                 .build();
     }
 
