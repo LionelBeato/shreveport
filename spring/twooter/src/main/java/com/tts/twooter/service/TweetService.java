@@ -22,5 +22,4 @@ public interface TweetService {
     void shortenLinks(List<Tweet> tweets);
     List<TweetDisplay> formatTimestamps(List<Tweet> tweets);
 
-
 }
