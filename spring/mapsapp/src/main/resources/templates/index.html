@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Maps</title>
+    <link rel="stylesheet" type="text/css" href="/custom.css" />
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
+</head>
+<body>
+<div class="container bg-light justify-content-center">
+    <div class="row">
+        <div class="span6" style="float: none; margin: 0 auto;">
+            <br/>
+            <h1 class="text-center">View a Location</h1>
+            <form th:action="@{/home}" th:object="${location}" method="post" autocomplete="off" class="form-inline">
+                <div class="form-group">
+                    <input type="text" th:field="*{city}" placeholder="City" class="form-control"/>
+                </div>
+                <div class="form-group">
+                    <input type="text" th:field="*{state}" placeholder="State" class="form-control"/>
+                </div>
+                <div class="form-group">
+                    <button class="btn btn-md btn-primary btn-block" name="Submit" value="Submit" type="Submit">Update Map</button>
+                </div>
+            </form>
+            <br/>
+        </div>
+    </div>
+</div>
+<div id="map"></div>
+<script th:inline="javascript">
+    /*<![CDATA[*/
+
+    let coords = {
+        lat: parseFloat(/*[[${location.lat}]]*/) || 39.9612,
+        lng: parseFloat(/*[[${location.lng}]]*/) || -82.9988
+            };
+    let city = /*[[${location.city}]]*/;
+    let state = /*[[${location.state}]]*/;
+
+    /*]]>*/
+</script>
+<script th:inline="javascript" src="/custom.js"></script>
+<script th:src="@{${'https://maps.googleapis.com/maps/api/js?key=' + @environment.getProperty('API_KEY') + '&callback=initMap'}}"
+        async defer></script>
+</body>
+</html>

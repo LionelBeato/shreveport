@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+
+<head>
+    <title>Registration</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css">
+    <link rel="stylesheet" href="/custom.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="/custom.js"></script>
+</head>
+
+<body>
+
+<div class="container">
+
+    <div th:replace="fragments/navbar"></div>
+    <div class="container">
+        <h2>Tweets containing #<span th:text="${tag}"></span></h2>
+        <div class="list-group" th:each="tweet:${tweetList}">
+            <div class="list-group-item list-group-item-action">
+                <div class="d-flex w-100 justify-content-between">
+                    <a class="username" th:href="@{/users/} + ${tweet.user.username}">@<span
+                            th:text="${tweet.user.username}"></span></a><small> <span
+                        th:text="${tweet.date}"></span></small>
+                </div>
+                <p class="mb-1" th:utext="${tweet.message}"></p>
+            </div>
+        </div>
+        <div th:if="${#lists.isEmpty(tweetList)}">
+            <h3>No tweets contain this hashtag</h3>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

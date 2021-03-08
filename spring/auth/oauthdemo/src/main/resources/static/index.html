@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <base href="/">
+</head>
+<body>
+
+<h1>Home Page</h1>
+
+<div id="unauthenticated" style="display: none">
+    Sign in with Github: <a href="/oauth2/authorization/github">click here</a>
+</div>
+
+<div id="authenticated" style="display: none">
+    Hello <span id="user"></span>
+    <button onClick="logout()" class="btn btn-primary">Logout</button>
+</div>
+
+<script>
+
+    async function logout() {
+        let response = await fetch('/logout');
+        if (response.ok) {
+            document.getElementById("unauthenticated").style.display = "block";
+            document.getElementById("authenticated").style.display = "none";
+        }
+        else {
+            return null;
+        }
+
+    }
+
+    async function checkLoggedIn() {
+            let response = await fetch('/user');
+            if (response.ok) {
+                let userInfo = await response.json();
+                document.getElementById("user").innerHTML = userInfo.login;
+                document.getElementById("unauthenticated").style.display = "none";
+                document.getElementById("authenticated").style.display = "block";
+            } else {
+                document.getElementById("unauthenticated").style.display = "block";
+                document.getElementById("authenticated").style.display = "none";
+            }
+    }
+
+    checkLoggedIn();
+
+</script>
+
+</body>
+</html>
