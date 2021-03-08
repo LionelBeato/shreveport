@@ -1,3 +1,0 @@
-MERGE INTO `role` VALUES (1, 'USER');
-MERGE INTO `role` VALUES (2, 'ADMIN');
-MERGE INTO `role` VALUES (3, 'MOD');

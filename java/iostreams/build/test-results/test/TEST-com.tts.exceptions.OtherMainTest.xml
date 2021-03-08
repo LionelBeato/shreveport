@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="com.tts.exceptions.OtherMainTest" tests="2" skipped="0" failures="0" errors="0" timestamp="2021-01-26T17:56:31" hostname="Lionels-MacBook-Air.local" time="0.046">
-  <properties/>
-  <testcase name="whenICallMethodWithNo_ThenIShouldGetBackNoExceptionMessage()" classname="com.tts.exceptions.OtherMainTest" time="0.034"/>
-  <testcase name="tryToDoAThingTest()" classname="com.tts.exceptions.OtherMainTest" time="0.008"/>
-  <system-out><![CDATA[]]></system-out>
-  <system-err><![CDATA[]]></system-err>
-</testsuite>
