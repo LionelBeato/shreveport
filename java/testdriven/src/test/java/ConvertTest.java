@@ -10,10 +10,10 @@ public class ConvertTest {
 //        fail("This test is not yet implemented");
         // given 100 centimeters
         // when I convert to inches I get back 100/2.54 == 39.3701
-        double expected = 39.37007874015748;
+        double expected = 39.3701;
         double actual = Convert.convertLengthFromCentToInches(100);
 
-        assertEquals(expected, actual);
+        assertEquals(expected, actual, 0.0001);
     }
 
     @Test
