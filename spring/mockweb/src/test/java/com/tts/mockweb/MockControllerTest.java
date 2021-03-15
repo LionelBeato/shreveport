@@ -1,6 +1,7 @@
 package com.tts.mockweb;
 
 import org.junit.jupiter.api.Test;
+import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -29,5 +30,4 @@ public class MockControllerTest {
                 .andExpect(content().string(containsString("Hello world!")));
 
     }
-
 }
