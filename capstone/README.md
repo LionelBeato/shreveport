@@ -60,6 +60,16 @@ Start writing out your code! Test your code as often as possible to make sure ev
 
 Pick a hosting solution and deploy your application. It should be easily accesible by anyone with internet access. Once its deployed, you can easily present your application!
 
+### OPTIONAL: Persistent Database
+
+Via a hosting solution such as Heroku, you are given the ability to utilize a persistent database. Check the link belows for an offical guide on the topic. Here I will outline the basics steps you'll need to employ in order to have a persisent database online via Heroku.
+
+	1. Create a project via Spring Initializer. [Here is a link to my starter project with all of the appropiate dependencies](https://start.spring.io/#!type=gradle-project&language=java&platformVersion=2.4.3.RELEASE&packaging=jar&jvmVersion=11&groupId=com.tts&artifactId=hosted-database&name=hosted-database&description=Heroku%20Spring%20Boot%20sample%20application%20with%20database&packageName=com.tts.hosted-database&dependencies=postgresql,data-jpa,web). Set up a standard MVC with at least one endpoint that creates and saves an entity. Have that endpoint return the same entity. 
+
+	2. As long as you have the postgres dependency, you are able to set up the heroku plugin and have it work with little configuration. Set up an application on heroku. Go to your application's overview page and navigate to the "resources" page. Under add-ons, search for Heroku Postgres and click on "Submit Order Form". Your application now has a bespoke database!
+
+	3. Navigate to your endpoint. In your application.properties, make sure you have `spring.jpa.hibernate.ddl-auto=${SPRING_JPA_HIBERNATE_DDL-AUTO}` if your endpoint isn't working.   
+
 ## Resources
 
 - [Heroku: Get Started with Java](https://devcenter.heroku.com/articles/getting-started-with-java)
